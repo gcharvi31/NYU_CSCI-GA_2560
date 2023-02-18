@@ -1,7 +1,7 @@
 import sys
 from collections import defaultdict
-from minmax_normal import DAG
-from minmax_prune import DAG_ab
+from basic import DAG
+from prune import DAG_ab
 
 def read_input(filename):
     with open(filename, 'r') as f:
@@ -12,7 +12,8 @@ def read_input(filename):
 def check_input_format(input_):
     for i in input_:
         if not i.isalnum():
-            raise Exception("Node label has to be alphanumeric")
+            print("Node label has to be alphanumeric")
+            exit()
             
 
 def check_missing_leaves(label2val, leaf_nodes, adj_list):
@@ -20,12 +21,14 @@ def check_missing_leaves(label2val, leaf_nodes, adj_list):
         if leaf not in label2val:
             lis = [li for li in adj_list.values() if leaf in li]
             parent_nodes = [k for li in lis for k in adj_list if adj_list[k]==li]
-            raise Exception(f"child node {leaf} of {parent_nodes} not found")
+            print(f"child node {leaf} of {parent_nodes} not found")
+            exit()
 
 
 def check_multiple_root(root_set):
     if len(root_set) > 1:
-        raise Exception(f"multiple roots: {root_set}")
+        print(f"multiple roots: {root_set}")
+        exit()
             
 
 def find_root(child2parent, adj_list):
@@ -101,15 +104,15 @@ def main():
         n = None
 
     # Read and parse input
-    adj_list, label2val, root = parse_input(input_file)
+    adj_list, label2val, root_label = parse_input(input_file)
 
     if ab:
-        dag_ab = DAG_ab(adj_list=adj_list, root_label=root, root_node_type=root_node_type,
+        dag_ab = DAG_ab(adj_list=adj_list, root_label=root_label, root_node_type=root_node_type,
          n=n, label2val=label2val, v=verbose)
         dag_ab.create_node_graph()
 
     if not ab:
-        dag = DAG(adj_list=adj_list, root_label=root, root_node_type=root_node_type,
+        dag = DAG(adj_list=adj_list, root_label=root_label, root_node_type=root_node_type,
          n=n, label2val=label2val, v=verbose)
         dag.create_node_graph()
 

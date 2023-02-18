@@ -42,8 +42,6 @@ class DAG:
         
         self.root = self._create_nodes(self.root_label, self.root_node_type)
         if not self.verbose:
-            res = max([child.value for child in self.root.children]) if self.root.node_type == 'max' \
-                else min([child.value for child in self.root.children])
             choice = self.root.children[np.argmax([child.value for child in self.root.children])].label \
                 if self.root.node_type == 'max' \
                     else self.root.children[np.argmin([child.value for child in self.root.children])].label
