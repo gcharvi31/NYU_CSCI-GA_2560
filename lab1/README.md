@@ -1,7 +1,7 @@
 # MinMax Tree with Alpha-Beta Pruning and Max-value cutoff
 
 ## Sample command:
-`python minmax.py -v -ab 5 min example1.txt`
+`python3 minmax.py -v -ab 5 min example1.txt`
 
 where:
 

@@ -1,14 +1,11 @@
 ## Alpha Beta Pruning
 ## ------------------
-
 from collections import defaultdict
 import numpy as np
 
-## Alpha Beta Pruning
-## ------------------
 
 def condition(alpha, beta):
-    return beta < alpha
+    return beta <= alpha
 
 
 class Node_ab:
@@ -52,9 +49,6 @@ class DAG_ab:
         alpha = float('-inf')
         beta = float('inf')
         self.root = self._create_nodes(self.root_label, self.root_node_type, alpha, beta)
-        if not self.verbose:
-            choice = [child.label for child in self.root.children if child.value==self.root.value][0]
-            print(f"({self.root.node_type}){self.root.label} chooses {choice} for {self.root.value}")
 
         
     def _create_nodes(self, root_label, root_node_type, root_alpha, root_beta):
@@ -64,9 +58,10 @@ class DAG_ab:
         if root_label in self.label2node:
             # print(f"root_label = {root_label} already in label2node.")
             root_node = self.label2node[root_label]
+            root_node.alpha = root_alpha
+            root_node.beta = root_beta
             # print(f"{root_node} old reused ^^^^^^^^^^^^^^^^^^^^^^^^^^")
         else:
-            # print(f"root_label = {root_label} not in label2node.")
             root_node = Node_ab(label=root_label,
                              value=self.label2val[root_label],
                              node_type=root_node_type,
@@ -74,61 +69,95 @@ class DAG_ab:
                              beta=root_beta)
             self.label2node[root_label] = root_node
             # print(f"{root_node} created ^^^^^^^^^^^^^^^^^^^^^^^^^^")
-    
-        local_verbose = True
 
         if root_label in self.adj_list:
             # print(f"Present: {self.adj_list[root_label]}")
             # print(f"Rootnode before processing children: {root_node}")
+            child_values = []
             for child_label in self.adj_list[root_label]:
+                local_verbose = True
                 # print(f"Processing child: {child_label} of node:{root_label}")
-                if condition(root_node.alpha, root_node.beta):
-                    # print(f"pruning child: {child_label} of parent: {root_label}.........")
-                    local_verbose = False
-                    break;
                 if root_node_type == 'max':
                     child_node_type = 'min'
                 if root_node_type == 'min':
                     child_node_type = 'max'
                 child_node = self._create_nodes(child_label, child_node_type, root_node.alpha, root_node.beta)
                 
+                # set alpha and beta
                 if root_node.node_type == 'max':
                     if child_node.value > root_node.alpha:
                         root_node.alpha = child_node.value
-                        # root_node.value = root_node.alpha
-                        choice = child_node
                         
-                
                 if root_node.node_type == 'min':
                     if child_node.value < root_node.beta:
                         root_node.beta = child_node.value
-                        # root_node.value = root_node.beta
-                        choice = child_node
-                    
-                # print(f"Rootnode after processing child: {child_label}: {root_node}")
-
+                
+                if condition(root_node.alpha, root_node.beta):
+                    # print(f"pruning siblings after {child_label} of parent:{root_label}.........")
+                    local_verbose = False
+                    root_node.children.append(child_node)
+                    if root_node.node_type == 'max':
+                        if self.n and child_node.value == self.n:
+                            root_node.value = child_node.value
+                            choice = child_label
+                            if self.verbose and local_verbose:
+                                print(f"({root_node_type}){root_label} chooses {choice} for {root_node.value}")
+                            return root_node
+                
+                    if root_node.node_type == 'min':
+                        # print(f"*********** {child_node.value}, {root_node.value} ***********")
+                            if self.n and child_node.value == -self.n:
+                                root_node.value = child_node.value
+                                choice = child_label
+                                if self.verbose and local_verbose:
+                                    print(f"({root_node_type}){root_label} chooses {choice} for {root_node.value}")
+                                return root_node
+                
+                    child_values.append(child_node.value)
+                    # print(f"Rootnode {root_node} after processing child:{child_node}; further children (if any) of {root_node.label} will not be processed")
+                    break;
+                
                 root_node.children.append(child_node)
-                 
+
                 if root_node.node_type == 'max':
-                    root_node.value = max([c.value for c in root_node.children])
-                    choice = self.adj_list[root_label][np.argmax([c.value for c in root_node.children])]
-                    if self.n and root_node.value == self.n:
-                        if self.verbose and local_verbose:
-                            print(f"({root_node_type}){root_label} chooses {choice} for {root_node.value}")
-                        return root_node
+                    # print(f"*********** {child_node.value}, {root_node.value} ***********")
+                        if self.n and child_node.value == self.n:
+                            root_node.value = child_node.value
+                            choice = child_label
+                            if self.verbose and local_verbose:
+                                print(f"({root_node_type}){root_label} chooses {choice} for {root_node.value}")
+                            return root_node
                 
                 if root_node.node_type == 'min':
-                    root_node.value = min([c.value for c in root_node.children])
-                    choice = self.adj_list[root_label][np.argmin([c.value for c in root_node.children])]
-                    if self.n and root_node.value == self.n:
-                        if self.verbose and local_verbose:
-                            print(f"({root_node_type}){root_label} chooses {choice} for {root_node.value}")
-                        return root_node
-                    
+                    # print(f"*********** {child_node.value}, {root_node.value} ***********")
+                        if self.n and child_node.value == -self.n:
+                            root_node.value = child_node.value
+                            choice = child_label
+                            if self.verbose and local_verbose:
+                                print(f"({root_node_type}){root_label} chooses {choice} for {root_node.value}")
+                            return root_node
                 
+                child_values.append(child_node.value)
                 
-            if self.verbose and local_verbose:
-                if not condition(root_node.alpha, root_node.beta):
-                    print(f"({root_node_type}){root_node.label} chooses {choice} for {root_node.value} ")
-        # print(f"Rootnode after processing all its children: {root_node}")
+                # print(f"Rootnode {root_node} after processing child:{child_node}")
+
+            # print(f"%%%%%%%% {root_node.children, [child.value for child in root_node.children]}")
+            if root_node.node_type == 'max':
+                root_node.value = max(child_values)
+                # temp = child_values[::-1]
+                # choice = root_node.children[len(temp) - np.argmax(temp) - 1].label
+                choice = root_node.children[np.argmax(child_values)].label
+                
+            if root_node.node_type == 'min':
+                root_node.value = min(child_values)
+                # temp = child_values[::-1]
+                # choice = root_node.children[len(temp) - np.argmin(temp) - 1].label
+                choice = root_node.children[np.argmin(child_values)].label
+
+
+            if (self.verbose and local_verbose) or (root_label == self.root_label):
+                print(f"({root_node_type}){root_node.label} chooses {choice} for {root_node.value} ")        
+            
+        # print(f"Rootnode {root_node} after processing all its children")
+        
         return root_node

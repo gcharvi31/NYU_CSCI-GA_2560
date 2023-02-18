@@ -77,6 +77,10 @@ def parse_input(filename):
 
 
 def main():
+    if len(sys.argv) < 3:
+        print(f"Insufficient arguments")
+        exit()
+        
     args = [i for i in sys.argv[1:]]
 
     args = args[::-1]
