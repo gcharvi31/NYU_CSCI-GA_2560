@@ -1,0 +1,99 @@
+INFO: 1_R 1_G
+INFO: !1_R !2_R
+INFO: !1_R !3_R
+INFO: !1_G !2_G
+INFO: !1_G !3_G
+INFO: 10_R 10_G
+INFO: !10_R !6_R
+INFO: !10_G !6_G
+INFO: 2_R 2_G
+INFO: !2_R !1_R
+INFO: !2_R !3_R
+INFO: !2_R !4_R
+INFO: !2_R !5_R
+INFO: !2_G !1_G
+INFO: !2_G !3_G
+INFO: !2_G !4_G
+INFO: !2_G !5_G
+INFO: 3_R 3_G
+INFO: !3_R !1_R
+INFO: !3_R !2_R
+INFO: !3_R !5_R
+INFO: !3_R !6_R
+INFO: !3_G !1_G
+INFO: !3_G !2_G
+INFO: !3_G !5_G
+INFO: !3_G !6_G
+INFO: 4_R 4_G
+INFO: !4_R !2_R
+INFO: !4_R !5_R
+INFO: !4_R !7_R
+INFO: !4_R !8_R
+INFO: !4_G !2_G
+INFO: !4_G !5_G
+INFO: !4_G !7_G
+INFO: !4_G !8_G
+INFO: 5_R 5_G
+INFO: !5_R !2_R
+INFO: !5_R !3_R
+INFO: !5_R !4_R
+INFO: !5_R !6_R
+INFO: !5_R !8_R
+INFO: !5_R !9_R
+INFO: !5_G !2_G
+INFO: !5_G !3_G
+INFO: !5_G !4_G
+INFO: !5_G !6_G
+INFO: !5_G !8_G
+INFO: !5_G !9_G
+INFO: 6_R 6_G
+INFO: !6_R !10_R
+INFO: !6_R !3_R
+INFO: !6_R !5_R
+INFO: !6_R !9_R
+INFO: !6_G !10_G
+INFO: !6_G !3_G
+INFO: !6_G !5_G
+INFO: !6_G !9_G
+INFO: 7_R 7_G
+INFO: !7_R !4_R
+INFO: !7_R !8_R
+INFO: !7_G !4_G
+INFO: !7_G !8_G
+INFO: 8_R 8_G
+INFO: !8_R !4_R
+INFO: !8_R !5_R
+INFO: !8_R !7_R
+INFO: !8_R !9_R
+INFO: !8_G !4_G
+INFO: !8_G !5_G
+INFO: !8_G !7_G
+INFO: !8_G !9_G
+INFO: 9_R 9_G
+INFO: !9_R !5_R
+INFO: !9_R !6_R
+INFO: !9_R !8_R
+INFO: !9_G !5_G
+INFO: !9_G !6_G
+INFO: !9_G !8_G
+INFO: hard case: guess 10_G=True
+INFO: easy case: pure literal !10_R; 10_R=False
+INFO: easy case: unit literal !6_G; 6_G=False
+INFO: easy case: unit literal 6_R; 6_R=True
+INFO: easy case: unit literal !3_R; 3_R=False
+INFO: easy case: unit literal 3_G; 3_G=True
+INFO: easy case: unit literal !1_G; 1_G=False
+INFO: easy case: unit literal 1_R; 1_R=True
+INFO: easy case: unit literal !2_R; 2_R=False
+INFO: easy case: unit literal 2_G; 2_G=True
+INFO: contradiction: backtrack guess 10_G=False
+INFO: easy case: unit literal 10_R; 10_R=True
+INFO: easy case: unit literal !6_R; 6_R=False
+INFO: easy case: unit literal 6_G; 6_G=True
+INFO: easy case: unit literal !3_G; 3_G=False
+INFO: easy case: unit literal 3_R; 3_R=True
+INFO: easy case: unit literal !1_R; 1_R=False
+INFO: easy case: unit literal 1_G; 1_G=True
+INFO: easy case: unit literal !2_G; 2_G=False
+INFO: easy case: unit literal 2_R; 2_R=True
+INFO: Unsuccessful

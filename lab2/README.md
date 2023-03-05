@@ -1,6 +1,6 @@
 # Map/Vertex coloring via DPLL
 A python program to assign colors to neighboring vertices of a graph such that no two adjacent vertices have the same color
-Uses the [Davis–Putnam–Logemann–Loveland (DPLL) algorithm] (https://en.wikipedia.org/wiki/DPLL_algorithm)
+Uses the [Davis–Putnam–Logemann–Loveland (DPLL) algorithm](https://en.wikipedia.org/wiki/DPLL_algorithm)
 
 Algorithm pseudo code - https://cs.nyu.edu/~davise/ai/dp.txt
 
