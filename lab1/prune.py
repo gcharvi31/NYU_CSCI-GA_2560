@@ -93,7 +93,7 @@ class DAG_ab:
                         root_node.beta = child_node.value
                 
                 if condition(root_node.alpha, root_node.beta):
-                    # print(f"pruning siblings after {child_label} of parent:{root_label}.........")
+                    print(f"pruning siblings after {child_label} of parent:{root_label}.........")
                     local_verbose = False
                     root_node.children.append(child_node)
                     if root_node.node_type == 'max':
@@ -114,7 +114,7 @@ class DAG_ab:
                                 return root_node
                 
                     child_values.append(child_node.value)
-                    # print(f"Rootnode {root_node} after processing child:{child_node}; further children (if any) of {root_node.label} will not be processed")
+                    print(f"Rootnode {root_node} after processing child:{child_node}; further children (if any) of {root_node.label} will not be processed")
                     break;
                 
                 root_node.children.append(child_node)
