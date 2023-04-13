@@ -23,9 +23,9 @@ Implements the algorithm -
 
 
 ## Sample command:
-`python3 mdp.py some_input.txt`
+`python3 mvp.py some_input.txt`
 
-`python3 mdp.py -df 0.9 -tol 0.001 -iter 100 -min some_input.txt`
+`python3 mvp.py -df 0.9 -tol 0.001 -iter 100 -min some_input.txt`
 
 where:
 
