@@ -206,7 +206,7 @@ def assign_nodetype(name2nodes):
         # If a node has no edges it is terminal. A probability entry for such a node is an error.
         if len(node.edges)==0:
             if len(node.probs)!=0:
-                print("probability entry for Terminal node found, exiting... ")
+                log.error("probability entry for Terminal node found, exiting... ")
                 exit(0)
             else:
                 node.node_type = 'Terminal'
@@ -412,8 +412,8 @@ def main():
 
     # Parse command line arguments
     if len(sys.argv) < 1:
-        print(f"Insufficient arguments")
-        exit()
+        log.error(f"Insufficient arguments")
+        exit(0)
 
     args = [i for i in sys.argv[1:]]
 
