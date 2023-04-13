@@ -1,0 +1,2 @@
+
+Class1=-1.310 Class2=2.692 Class3=7.384 Drink=3.768 FB=-3.311 Internet=-2.311 Pass=10.000 Pub=4.768 Sleep=0.000 Study1=0.692 Study2=5.384 
