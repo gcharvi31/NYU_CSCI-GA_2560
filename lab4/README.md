@@ -1,4 +1,4 @@
-# kNN, Naive Bayes and kMeans'
+# kNN, Naive Bayes and kMeans
 A python program demonstrating three supervised learning algorithms: kNN, Naive Bayes and kMeans
 Compute Precision and Recall for each label in the test data
 
@@ -40,6 +40,7 @@ arguments: if a list of centroids is provided those should be used for kMeans
 
 
 ## Requirements
-python3
-numpy
-pandas
+Please install them before running the code using `pip install <package_name>`
+- python3
+- numpy
+- pandas
